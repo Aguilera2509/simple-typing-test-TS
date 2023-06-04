@@ -5,6 +5,10 @@ export const SpanWordsTyping:NextPage<{dataText:string[], words:string, dataUser
   const [rowToShow, setRowToShow] = useState<number>(0);
   
   useEffect(()=> {
+    document.addEventListener("contextmenu", (e:MouseEvent) => {
+      e.preventDefault();
+    });
+    
     if(rowToShow === 0){
       setDataUserSpan(dataText[rowToShow]);
     }else{
@@ -21,7 +25,7 @@ export const SpanWordsTyping:NextPage<{dataText:string[], words:string, dataUser
 
   return(
     <div className="text-bg-primary p-3 m-2" style={{"borderRadius": "2%"}}>
-      {dataUserSpan.split("").map((el, index) => {
+      {dataUserSpan.replace(/\n/g," ").split("").map((el, index) => {
         let BgColor:string = "";
 
         if(index < words.length){
